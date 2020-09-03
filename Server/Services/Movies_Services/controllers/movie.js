@@ -17,7 +17,7 @@ class MovieController {
     static createMovie(req,res){
         let newMovie = {
             title: req.body.title,
-            description: req.body.title,
+            description: req.body.description,
             poster: req.body.poster,
             video: req.body.video
         }
@@ -29,11 +29,11 @@ class MovieController {
     static updateMovie(req,res){
         let updatedMovie = {
             title: req.body.title,
-            description: req.body.title,
+            description: req.body.description,
             poster: req.body.poster,
             video: req.body.video
         }
-        Movie.create(updatedMovie)
+        Movie.update(updatedMovie,{where:{id: req.params.id}})
         .then(data => {res.status(201).json({message: `${updatedMovie.title} has been updated`})})
         .catch(err => res.status(500).json({message: 'Internal Server Error', err}))
     }
@@ -43,7 +43,7 @@ class MovieController {
         let arrMovieId = movieId.split(',') 
         let deletePromises = []   
         for(let i = 0 ; i <= arrMovieId.length-1; i++){
-            deletePromises.push(Movie.destroy({where:{id = arrMovieId[i]}}))
+            deletePromises.push(Movie.destroy({where:{id : arrMovieId[i]}}))
         }
         Promise.all(deletePromises) 
         .then(data => res.status(200).json({message: `${arrMovieId.length} movies has been deleted`}))       

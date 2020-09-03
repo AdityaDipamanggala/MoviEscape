@@ -23,7 +23,7 @@ class UserController{
         User.findOne({username: req.body.username})
         .then(data => {
             if(data && data.role === req.params.role && bcrypt.compareSync(req.body.password,data.password)){
-                let token = jwt.sign({id: data._id, email: data.email, username: data.username, role: data.role},process.env.JWT_KEY)
+                let token = jwt.sign({id: data._id, email: data.email, username: data.username, role: data.role},'jwt-key')
                 res.status(200).json({message: 'Login successfully', acess_token: token})
             }
             else res.status(400).json({message: 'Invalid User'})

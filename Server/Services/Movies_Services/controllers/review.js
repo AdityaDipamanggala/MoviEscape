@@ -17,10 +17,10 @@ class ReviewController{
     
     static createReview(req, res){
         let newReview = {
-            UserId = req.userData.id,
-            MovieId = req.body.id,
-            description = req.body.description,
-            rating = req.body.rating
+            UserId : req.userData.id,
+            MovieId : req.body.id,
+            description : req.body.description,
+            rating : req.body.rating
         }
         Review.create(newReview)
         .then(data => res.status(201).json({message: 'Review has been submited'}))
@@ -30,10 +30,10 @@ class ReviewController{
     static updateReview(req, res){
         let id = req.params.id
         let updatedReview = {
-            UserId = req.userData.id,
-            MovieId = req.body.id,
-            description = req.body.description,
-            rating = req.body.rating
+            UserId : req.userData.id,
+            MovieId : req.body.id,
+            description : req.body.description,
+            rating : req.body.rating
         }
         Review.update(updatedReview,{where:{id: id}})
         .then(data => res.status(201).json({message: 'Review has been edited'}))
